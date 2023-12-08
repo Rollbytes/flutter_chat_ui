@@ -342,7 +342,9 @@ class Message extends StatelessWidget {
           ConstrainedBox(
             constraints: BoxConstraints(
               maxWidth: isFullLength
-                  ? ((isMobile) ? (MediaQuery.of(context).size.width * 0.9) : 366)
+                  ? ((isMobile)
+                      ? (MediaQuery.of(context).size.width * 0.9)
+                      : ((MediaQuery.of(context).size.width / 3) - 51))
                   : messageWidth.toDouble(),
               // maxWidth: isFullLength ? MediaQuery.of(context).size.width : messageWidth.toDouble(),
             ),
