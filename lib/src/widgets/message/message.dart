@@ -317,7 +317,7 @@ class Message extends StatelessWidget {
                   ? Alignment.centerRight
                   : Alignment.centerLeft,
       margin: (isFullLength)
-          ? EdgeInsetsDirectional.only(
+          ? const EdgeInsetsDirectional.only(
               bottom: 4,
               end: 9,
               start: 9,
@@ -341,12 +341,13 @@ class Message extends StatelessWidget {
           if (!currentUserIsAuthor && showUserAvatars) _avatarBuilder(),
           ConstrainedBox(
             constraints: BoxConstraints(
-              maxWidth: isFullLength
-                  ? ((isMobile)
-                      ? (MediaQuery.of(context).size.width * 0.9)
-                      : ((MediaQuery.of(context).size.width / 3) - 51))
-                  : messageWidth.toDouble(),
+              // maxWidth: isFullLength
+              //     ? ((isMobile)
+              //         ? (MediaQuery.of(context).size.width * 0.9)
+              //         : ((MediaQuery.of(context).size.width / 3) - 51))
+              //     : messageWidth.toDouble(),
               // maxWidth: isFullLength ? MediaQuery.of(context).size.width : messageWidth.toDouble(),
+              maxWidth: messageWidth.toDouble(),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,

@@ -102,6 +102,7 @@ class Chat extends StatefulWidget {
     this.videoMessageBuilder,
     this.slidableMessageBuilder,
     this.isFullLength = false,
+    this.maxMessageWidth = 512,
   });
 
   /// See [Message.audioMessageBuilder].
@@ -318,8 +319,11 @@ class Chat extends StatefulWidget {
   /// See [Message.slidableMessageBuilder].
   final Widget Function(types.Message, Widget msgWidget)? slidableMessageBuilder;
 
-  /// If Message should be in full length
+  /// If Message should be in full length.
   final bool? isFullLength;
+
+  /// Max Message Width.
+  final int? maxMessageWidth;
 
   @override
   State<Chat> createState() => ChatState();
@@ -449,9 +453,11 @@ class ChatState extends State<Chat> {
       if (message is types.SystemMessage) {
         messageWidget = widget.systemMessageBuilder?.call(message) ?? SystemMessage(message: message.text);
       } else {
-        final messageWidth = widget.showUserAvatars && message.author.id != widget.user.id
-            ? min(constraints.maxWidth * 0.72, 440).floor()
-            : min(constraints.maxWidth * 0.78, 440).floor();
+        final messageWidth = (widget.isFullLength ?? false)
+            ? (widget.maxMessageWidth ?? 512)
+            : widget.showUserAvatars && message.author.id != widget.user.id
+                ? min(constraints.maxWidth * 0.72, 440).floor()
+                : min(constraints.maxWidth * 0.78, 440).floor();
         final Widget msgWidget = Message(
           audioMessageBuilder: widget.audioMessageBuilder,
           avatarBuilder: widget.avatarBuilder,
