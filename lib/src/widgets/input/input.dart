@@ -243,7 +243,10 @@ class _InputState extends State<Input> {
   @override
   void dispose() {
     _inputFocusNode.dispose();
-    _textController.dispose();
+    // Only dispose the non-custom controller.
+    if (widget.options.textEditingController == null) {
+      _textController.dispose();
+    }
     super.dispose();
   }
 
