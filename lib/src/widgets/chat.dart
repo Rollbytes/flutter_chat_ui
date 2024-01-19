@@ -103,6 +103,7 @@ class Chat extends StatefulWidget {
     this.slidableMessageBuilder,
     this.isFullLength = false,
     this.maxMessageWidth = 512,
+    this.spacerHeight,
   });
 
   /// See [Message.audioMessageBuilder].
@@ -325,6 +326,9 @@ class Chat extends StatefulWidget {
   /// Max Message Width.
   final int? maxMessageWidth;
 
+  /// Spacer Height
+  final double? spacerHeight;
+
   @override
   State<Chat> createState() => ChatState();
 }
@@ -433,7 +437,7 @@ class ChatState extends State<Chat> {
           );
     } else if (object is MessageSpacer) {
       return SizedBox(
-        height: object.height,
+        height: widget.spacerHeight ?? object.height,
       );
     } else if (object is UnreadHeaderData) {
       return AutoScrollTag(

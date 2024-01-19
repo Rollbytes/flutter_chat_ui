@@ -55,6 +55,7 @@ class Message extends StatelessWidget {
     this.userAgent,
     this.videoMessageBuilder,
     this.isFullLength = false,
+    this.spacerHeight,
   });
 
   /// Build an audio message inside predefined bubble.
@@ -178,6 +179,8 @@ class Message extends StatelessWidget {
 
   /// Build an audio message inside predefined bubble.
   final Widget Function(types.VideoMessage, {required int messageWidth})? videoMessageBuilder;
+
+  final double? spacerHeight;
 
   Widget _avatarBuilder() => showAvatar
       ? avatarBuilder?.call(message.author) ??
